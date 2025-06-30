@@ -72,6 +72,9 @@ public class BuilderPatternExample {
             }
 
             public User build() {
+                if (this.name == null || this.email == null) {
+                    throw new IllegalStateException("User's name or email is not filled");
+                }
                 return new User(this);
             }
         }
@@ -80,6 +83,9 @@ public class BuilderPatternExample {
     public static void main(String[] args) {
         // Builder pattern in java
         var user = User.builder().name("user 1").email("user@test.com").build();
+        // Builder pattern exception
+//        var badUser = User.builder().name("user with no email").build();
+
         System.out.printf("User 1 information: %s%n",user.toString());
     }
 
